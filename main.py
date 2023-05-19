@@ -5,14 +5,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from schemas.question import questionSchema, questionsSchema
 from db import db
 from bson import ObjectId
+import pywhatkit
 
 app = FastAPI()
 
 origins = [
-    "http://localhost.tiangolo.com",
-    "https://localhost.tiangolo.com",
-    "http://localhost",
-    "http://localhost:5173",
+    "*",
 ]
 
 app.add_middleware(
@@ -34,3 +32,7 @@ class Question(BaseModel):
 async def get_all_questions():
     questions = db.questions.find()
     return questionsSchema(questions)
+
+@app.post('/send_msg')
+async def send_message():
+    pywhatkit.sendwhats_image("AB123CDEFGHijklmn", "images/qr.jpg", "Hola aquí estamos enviando el numero codigo qr")
