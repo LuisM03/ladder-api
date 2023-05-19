@@ -4,7 +4,6 @@ from typing import Optional
 from fastapi.middleware.cors import CORSMiddleware
 from schemas.question import questionSchema, questionsSchema
 from db import db
-from bson import ObjectId
 import pywhatkit
 
 app = FastAPI()
